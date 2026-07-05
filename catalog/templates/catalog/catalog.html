@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Streaming Catalog</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; }
+        .director { margin-bottom: 1.5rem; }
+        .movie { margin-left: 1rem; }
+    </style>
+</head>
+<body>
+    <h1>Movie Streaming Catalog</h1>
+    {% for director in directors %}
+        <div class="director">
+            <h2>{{ director.name }}</h2>
+            <p><strong>Nationality:</strong> {{ director.nationality }} | <strong>Born:</strong> {{ director.birth_year }}</p>
+            <ul>
+                {% for movie in director.movies.all %}
+                    <li class="movie">{{ movie.title }} — {{ movie.genre }} ({{ movie.release_year }}) on {{ movie.streaming_service }}</li>
+                {% empty %}
+                    <li class="movie">No movies listed yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% empty %}
+        <p>No directors available.</p>
+    {% endfor %}
+</body>
+</html>

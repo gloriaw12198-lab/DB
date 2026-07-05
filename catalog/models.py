@@ -1,0 +1,21 @@
+from django.db import models
+
+
+class Director(models.Model):
+    name = models.CharField(max_length=100)
+    nationality = models.CharField(max_length=100, blank=True)
+    birth_year = models.PositiveIntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Movie(models.Model):
+    title = models.CharField(max_length=200)
+    genre = models.CharField(max_length=100)
+    release_year = models.PositiveIntegerField()
+    streaming_service = models.CharField(max_length=100)
+    director = models.ForeignKey(Director, related_name='movies', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
