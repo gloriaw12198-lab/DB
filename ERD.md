@@ -2,18 +2,38 @@
 
 ```mermaid
 erDiagram
-    COURSE ||--o{ STUDENT : has
+    AUTHOR ||--o{ BOOK : writes
+    DIRECTOR ||--o{ MOVIE : directs
 
-    COURSE {
+    AUTHOR {
         int id PK
         string name
+        string nationality
     }
 
-    STUDENT {
+    BOOK {
+        int id PK
+        string title
+        string genre
+        int publication_year
+        int author_id FK
+    }
+
+    BOOK ||--o{ MOVIE : adapted_into
+
+    DIRECTOR {
         int id PK
         string name
-        int age
-        string email
-        int course_id FK
+        string nationality
+        int birth_year
+    }
+
+    MOVIE {
+        int id PK
+        string title
+        string genre
+        int release_year
+        string streaming_service
+        int director_id FK
     }
 ```

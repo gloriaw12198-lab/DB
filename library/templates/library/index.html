@@ -3,12 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Library Catalog</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 2rem; }
-        table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid #ccc; padding: 0.6rem; text-align: left; }
-        h1, h2 { color: #2c3e50; }
-    </style>
 </head>
 <body>
     <h1>Library Catalog</h1>
@@ -52,8 +46,22 @@
                 <td>{{ book.genre }}</td>
                 <td>{{ book.publication_year }}</td>
             </tr>
+            <tr>
+                <td colspan="4">
+                    {% if book.adapted_movies.exists %}
+                        Adapted into:
+                        <ul>
+                            {% for movie in book.adapted_movies.all %}
+                                <li>{{ movie.title }} ({{ movie.release_year }})</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <em>No movie adaptations currently linked.</em>
+                    {% endif %}
+                </td>
+            </tr>
             {% empty %}
-            <tr><td colspan="3">No books available.</td></tr>
+            <tr><td colspan="4">No books available.</td></tr>
             {% endfor %}
         </tbody>
     </table>

@@ -16,6 +16,13 @@ class Movie(models.Model):
     release_year = models.PositiveIntegerField()
     streaming_service = models.CharField(max_length=100)
     director = models.ForeignKey(Director, related_name='movies', on_delete=models.CASCADE)
+    book = models.ForeignKey(
+        'library.Book',
+        related_name='adapted_movies',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
 
     def __str__(self):
         return self.title
